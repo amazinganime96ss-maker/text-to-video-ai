@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Text to Video AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    textarea {
+      width: 100%;
+      height: 120px;
+      font-size: 16px;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+    }
+    button {
+      padding: 12px;
+      width: 100%;
+      margin-top: 10px;
+      font-size: 18px;
+      background: #22c55e;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    img {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2>🎬 Text to Video AI (Free)</h2>
+
+<textarea id="inputText" placeholder="Write your story here..."></textarea>
+
+<button onclick="generateVideo()">Generate Video</button>
+
+<div id="output"></div>
+
+<script>
+function generateVideo() {
+  const text = document.getElementById("inputText").value;
+  const output = document.getElementById("output");
+
+  output.innerHTML = "";
+
+  if (!text) {
+    alert("Please enter text");
+    return;
+  }
+
+  // AI Voice (Browser Free)
+  const speech = new SpeechSynthesisUtterance(text);
+  speech.lang = "en-US";
+  speech.rate = 1;
+  speechSynthesis.speak(speech);
+
+  // Simple Scene Image Generator
+  const scenes = text.split(".").slice(0, 3);
+
+  scenes.forEach(scene => {
+    if (scene.trim() !== "") {
+      const img = document.createElement("img");
+      img.src = "https://image.pollinations.ai/prompt/" + encodeURIComponent(scene);
+      output.appendChild(img);
+    }
+  });
+}
+</script>
+
+</body>
+</html>
